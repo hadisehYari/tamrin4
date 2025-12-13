@@ -1,0 +1,30 @@
+<body class="boo">
+    
+    <button (click)="add()" class="primary">افزودن</button>
+    <table>
+        <thead>
+            <tr>
+                <td>عنوان</td>
+                <td>نویسنده</td>
+                <td>ناشر</td>
+                <td>قیمت</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @for (item of data; track $index) {
+                <tr>
+                    <td>{{item.title}}</td>
+                    <td>{{item.writer}}</td>
+                    <td>{{item.publisher}}</td>
+                    <td>{{item.price}}</td>
+                    <td>
+                        <button class="primary">ویرایش</button>
+                        <button class="primary">حذف</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+      
+    </table>
+</body>
