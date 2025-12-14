@@ -1,0 +1,40 @@
+
+.primary {
+    background-color: rgb(38, 118, 255);
+    color: rgb(255, 255, 255);
+    padding: 0.5em 1em;
+    border-radius: 0.3em;
+    border: none;
+    font-size: 0.8em;
+    margin: 0.1em;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th {
+        background-color: rgb(249, 195, 255);
+        color: rgb(38, 118, 255);
+        text-align: right;
+    }
+
+    th,
+    td {
+        padding: 0.2em;
+    }
+
+    th {
+        border-top: 1px solid rgb(211, 211, 211);
+    }
+
+    tr {
+        border-bottom: 1px solid rgb(211, 211, 211);
+        background-color: rgb(255, 246, 253);
+
+    }
+
+    tr:nth-of-type(2n+1) {
+        background-color: rgb(234, 234, 234);
+    }
+}

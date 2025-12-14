@@ -1,8 +1,12 @@
+body {
+    background: radial-gradient(circle, rgba(238, 174, 202, 0.064) 0%, rgba(148, 188, 233, 0.064) 100%);
+}
 
 @font-face {
     font-family: pe;
     src: url('/fonts/IRANSans.woff');
 }
-*{
+
+* {
     font-family: pe;
 }

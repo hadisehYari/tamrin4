@@ -15,7 +15,6 @@ export class LoginPage {
     username: '',
     password: '',
     keepMe: false,
-
   };
   check() {
     if (this.loginForm.username == 'admin' && this.loginForm.password == 'admin') {

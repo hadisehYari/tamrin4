@@ -1,23 +1,38 @@
-.sidebar{
+.sidebar {
     position: fixed;
     right: 0;
     top: 0;
-    background-color: rgb(255, 156, 225);
-    width: 150px;
+    background-color: rgb(249, 195, 255);
+    width: 190px;
     height: 100vh;
     font-size: 1.5em;
-    a{
+
+    a {
         display: block;
-        color:rgb(52, 52, 52) ;
-        padding: 0.2em;
+        color: rgb(51, 111, 251);
+        padding: 0.2em 0.5em;
         text-decoration: none;
         cursor: pointer;
+        margin-top: 1.3em;
+        margin-left: 1em;
+        border-radius: 1em;
+        width: 120px;
+        margin-right: 0.9em;
+        background-color: rgba(187, 109, 180, 0.201);
     }
-    a::before{
+
+    a::before {
         content: '💎';
     }
+
+    a:hover {
+        background-color: rgba(148, 201, 255, 0.667);
+        color: aliceblue;
+        border-radius: 1em;
+    }
 }
-.content{
+
+.content {
     margin-right: 200px;
     padding: 0.5em;
     font-size: 1.5em;

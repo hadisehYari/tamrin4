@@ -1,21 +1,47 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { BooksService } from './books-service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-books-page',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './books-page.html',
   styleUrl: './books-page.scss',
 })
-export class BooksPage {
-  data: BookItem[] = [
-    { id: 1, title: 'c++', writer: 'خورم', publisher: 'خودش', price: 567000 },
-    { id: 2, title: 'برنامه نویسی', writer: 'خورم', publisher: 'خودش', price: 60000 },
-    { id: 3, title: 'پایگاه داده', writer: 'خورم', publisher: 'خودش', price: 5000 },
-    { id: 4, title: 'طراحی وب', writer: 'خورم', publisher: 'خودش', price: 80000 },
-    { id: 5, title: 'مدار', writer: 'خورم', publisher: 'خودش', price: 38900 },
-  ];
+export class BooksPage implements OnInit {
+  save() {
+    this.booksService.add(this.item);
+    this.dataRefresh();
+    this.state = 'list';
+  }
+  ngOnInit(): void {
+    this.dataRefresh();
+  }
+  data: BookItem[] = [];
+  item: BookItem = {
+    id: 0,
+    title: '',
+    writer: '',
+    price: 0,
+    publisher: '',
+  }
+  booksService = inject(BooksService);
+  state: string = 'list';
+  dataRefresh() {
+    this.data = this.booksService.list();
+  }
   add() {
-    this.data.push({id:6,title:'آزمایش',writer:'آزمایش',publisher:'آزمایش',price:11900});
+    this.state = 'add';
+    this.item = {
+      id: 0,
+      title: '',
+      writer: '',
+      price: 0,
+      publisher: '',
+    }
+  }
+  cancel() {
+    this.state = 'list';
   }
 }
 export interface BookItem {
@@ -23,5 +49,5 @@ export interface BookItem {
   title: string;
   writer: string;
   publisher: string;
-  price: number;
+  price?: number;
 }

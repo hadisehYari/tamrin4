@@ -6,7 +6,7 @@ export const privateGuard: CanActivateFn = (route, state) => {
     return true;
   }
   if (localStorage.getItem('auth-token')) {
-    sessionStorage.setItem('auth-token',localStorage.getItem('auth-token')??'')
+    sessionStorage.setItem('auth-token',localStorage.getItem('auth-token')??'');
     return true;
   }
   const router=inject(Router);
