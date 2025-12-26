@@ -1,5 +1,5 @@
-body {
-    background: radial-gradient(circle, rgba(238, 174, 202, 0.064) 0%, rgba(148, 188, 233, 0.064) 100%);
+body{
+    background-color: rgb(93, 108, 119);
 }
 
 @font-face {
@@ -9,4 +9,12 @@ body {
 
 * {
     font-family: pe;
+}
+.alert{
+    background-color: rgb(247, 189, 189);
+    border: 1px solid rgb(255, 40, 40);
+    padding: 1em;
+    border-radius: 0.2em;
+    margin: 1em;
+    text-align: center;
 }

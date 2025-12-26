@@ -1,30 +1,59 @@
 <body>
-    
+    @if (state=='list') {
     <button (click)="add()" class="primary">افزودن اعضا</button>
     <table>
         <thead>
             <tr>
-                <th>عنوان</th>
+                <th>شماره اعضا</th>
                 <th>نام</th>
                 <th>نام خانوادگی</th>
-                <th>تاریخ تولد</th>
+                <th>تاریخ عضویت</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             @for (item of data; track $index) {
-                <tr>
-                    <td>{{item.title}}</td>
-                    <td>{{item.name}}</td>
-                    <td>{{item.lastname}}</td>
-                    <td>{{item.birthday}}</td>
-                    <td>
-                        <button class="primary">ویرایش</button>
-                        <button class="primary">حذف</button>
-                    </td>
-                </tr>
+            <tr>
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.lastname}}</td>
+                <td>{{item.birthday}}</td>
+                <td>
+                    <button (click)="edit(item)" class="primary">ویرایش اطلاعات </button>
+                    <button (click)="remove(item)" class="primary">حذف </button>
+                </td>
+            </tr>
             }
         </tbody>
-      
     </table>
+    }
+    @else {
+    @if(state=='remove'){
+    <div class="alert">
+        آیا از حذف این کتاب اطمینان دارید؟
+    </div>
+    }
+    <form (ngSubmit)="save()">
+        <div>
+            <input [disabled]="state=='edit' || state=='remove'" [class.ghofl]="state=='edit'" [(ngModel)]="item.id"
+                id="id" name="id" type="number" placeholder="شناسه">
+        </div>
+        <div>
+            <input [disabled]="state=='remove'" [(ngModel)]="item.name" id="writer" name="writer" type="text"
+                placeholder="نویسنده">
+        </div>
+        <div>
+            <input [disabled]="state=='remove'" [(ngModel)]="item.lastname" id="publisher" name="publisher" type="text"
+                placeholder="ناشر">
+        </div>
+        <div>
+            <input [disabled]="state=='remove'" [(ngModel)]="item.birthday" id="price" name="price" type="number"
+                placeholder="قیمت">
+        </div>
+        <div>
+            <button class="primary" type="submit">تایید</button>
+            <button (click)="cancel()" class="primary" type="button">انصراف</button>
+        </div>
+    </form>
+    }
 </body>
