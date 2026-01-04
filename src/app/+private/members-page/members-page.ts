@@ -1,64 +1,43 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MembersService } from './members-service';
 import { FormsModule } from '@angular/forms';
+import { Thing } from '../../+shared/+base/base-thing';
+import { BaseCrudPage } from '../../+shared/+base/base-crud-page';
+import { BaseService } from '../../+shared/+base/base-service';
+import { BaseCrudComponent, Column } from "../../+shared/+base/base-crud-component/base-crud-component";
 
 @Component({
   selector: 'app-members-page',
-  imports: [FormsModule],
+  imports: [FormsModule, BaseCrudComponent],
   templateUrl: './members-page.html',
   styleUrl: './members-page.scss',
 })
-export class MembersPage {
-  save() {
-    if (this.state == 'add') {
-      this.MembersService.add(this.item);
-    } else if (this.state == 'edit') {
-      this.MembersService.edit(this.item);
-    } else if (this.state == 'remove') {
-      this.MembersService.remove(this.item);
-    }
-    this.dataRefresh();
-    this.state = 'list';
-  }
+export class MembersPage extends BaseCrudPage<MemberItem> implements OnInit {
   ngOnInit(): void {
-    this.dataRefresh();
-  }
-  data: MemberItem[] = [];
-  item: MemberItem = {
-    id: 0,
-    name: '',
-    lastname: '',
-    birthday: 0,
-  }
-  MembersService = inject(MembersService);
-  state: string = 'list';
-  dataRefresh() {
-    this.data = this.MembersService.list();
-  }
-  add() {
-    this.state = 'add';
     this.item = {
-      id: 0,
       name: '',
       lastname: '',
-      birthday: 0,
+      date: '',
+    }
+    this.dataRefresh();
+  }
+  override dataService = inject(MembersService);
+  override addPrepair(): void {
+    this.item = {
+      name: '',
+      lastname: '',
+      date: '',
     }
   }
-   edit(member: MemberItem) {
-      this.item = { ...member };
-      this.state = 'edit';
-    }
-    remove(member: MemberItem) {
-      this.item = { ...member };
-      this.state = 'remove';
-    }
-    cancel() {
-      this.state = 'list';
-    }
-  }
-export interface MemberItem {
+  memberColumns: Column[] = [
+    { field: 'id', title: 'شماره اعضا' },
+    { field: 'name', title: 'نام' },
+    { field: 'lastname', title: 'نام خانوادگی' },
+    { field: 'date', title: 'تاریخ عضویت' },
+  ]
+}
+export interface MemberItem extends Thing {
   name: string;
   lastname: string;
-  birthday?: number;
-  id: number;
+  date?: string;
 }

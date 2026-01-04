@@ -1,42 +1,13 @@
-<body>
-    @if (state=='list') {
-    <button (click)="add()" class="primary">افزودن</button>
-    <table>
-        <thead>
-            <tr>
-                <th>شناسه</th>
-                <th>عنوان</th>
-                <th>نویسنده</th>
-                <th>ناشر</th>
-                <th>قیمت</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (item of data; track $index) {
-            <tr>
-                <td>{{item.id}}</td>
-                <td>{{item.title}}</td>
-                <td>{{item.writer}}</td>
-                <td>{{item.publisher}}</td>
-                <td>{{item.price}}</td>
-                <td>
-                    <button (click)="edit(item)" class="primary">ویرایش</button>
-                    <button (click)="remove(item)" class="primary">حذف</button>
-                </td>
-            </tr>
-            }
-        </tbody>
-
-    </table>
-    }
-    @else {
-    @if(state=='remove'){
-    <div class="alert">
-        آیا از حذف این کتاب اطمینان دارید؟
-    </div>
-    }
-    <form (ngSubmit)="save()">
+<my-crud 
+    [mystate]="state" 
+    (onCancel)="cancel()" 
+    (onAdd)="add()"
+    [columns]="booksColumns"
+    [mydata]="data"
+    (onEdit)="edit($event)"
+    (onRemove)="remove($event)"
+    (onSave)="save()"
+    >
         <div>
             <input [disabled]="state=='edit' || state=='remove'" [class.ghofl]="state=='edit'" [(ngModel)]="item.id"
                 id="id" name="id" type="number" placeholder="شناسه">
@@ -57,10 +28,4 @@
             <input [disabled]="state=='remove'" [(ngModel)]="item.price" id="price" name="price" type="number"
                 placeholder="قیمت">
         </div>
-        <div>
-            <button class="primary" type="submit">تایید</button>
-            <button (click)="cancel()" class="primary" type="button">انصراف</button>
-        </div>
-    </form>
-    }
-</body>
+</my-crud>
